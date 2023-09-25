@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Login{% endblock title %}
+{% block 'content' %}
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('{% static 'assets/img/contact-header.jpg' %}');">
+      <div class="container position-relative d-flex flex-column align-items-center">
+        <h2>Login</h2>
+        <ol>
+          <li><a href="{% url 'root:home' %}">Home</a></li>
+          <li>Login</li>
+        </ol>
+      </div>
+    </div><!-- End Breadcrumbs -->
+</main>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-0"> <!-- Removed the border -->
+                <div class="card-body">
+                                     <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_table }} <!-- Use as_table to format the form as a table -->
+                        <button type="submit" class="btn btn-primary">Login</button>
+                        {{captcha}}
+                    </form>
+                    <p class="mt-3"><a href="{% url 'password_reset' %}">Forgot password?</a></p>
+                </div>
+            </div>
+            {% if messages %}
+                <div class="mt-3">
+                    {% for message in messages %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock 'content' %}
