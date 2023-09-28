@@ -53,6 +53,11 @@
         <!-- <img src="{% static 'assets/img/logo.png ' %}" alt=""> -->
         <h1 class="d-flex align-items-center">Nova</h1>
       </a>
+      {% if request.user.is_authenticated %}
+      <li class="logged-as">Logged as {{ request.user.username }}</li>
+
+      <img src="{{ request.user.image.url }}" alt="Profile Image" class="profile-image">
+      {% endif %}
 
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
@@ -64,20 +69,20 @@
           <li><a href="{% url 'root:service' %}">Services</a></li>
           <li><a href="{% url 'root:portfolio' %}">Portfolio</a></li>
           <li><a href="{% url 'root:team' %}">Team</a></li>
-          <li><a href="{% url 'root:blog' %}">Blog</a></li>
+          <li><a href="{% url 'blogs:blog' %}">Blog</a></li>
           <li class="dropdown"><a href="#"><span>Category</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               
               {% for cat in category %}
-              <li><a href={% url 'courses:course_cat' cat=cat.name %}>{{cat.name}}</a></li>
+              <li><a href="{% url 'blogs:blog_cat' cat=cat.name %}">{{ cat.name }}</a>
+              </li>
               {% endfor %}
 
             </ul>
           </li>
           <li><a href="{% url 'root:contact' %}">Contact</a></li>
           {% if request.user.is_authenticated %}
-          <li>loged as {{request.user.username}}</li>
-          <li><img src={{request.user.image.url}}></li>
+
           <li><a href={% url 'accounts:logout' %}>Logout</a></li>
           <li><a href={% url 'password_change' %}>change password</a></li>
           {% else %}

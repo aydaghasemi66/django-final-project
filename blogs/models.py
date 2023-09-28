@@ -1,8 +1,10 @@
 from django.db import models
+from accounts.models import CustomeUser
+import datetime
 
 # Create your models here.
 class Writer(models.Model):
-    #info = models.ForeignKey(User, on_delete=models.CASCADE)
+    info = models.ForeignKey(CustomeUser, on_delete=models.CASCADE)
     description = models.TextField()
     image = models.ImageField(upload_to='writer', default='writer.png')
     twitter = models.CharField(max_length=255, default='#')
@@ -17,10 +19,15 @@ class Category(models.Model):
     name = models.CharField(max_length=100)
     def __str__(self):
         return self.name
+class Tags(models.Model):
+    name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
 class Blog(models.Model):
     writerimage = models.ImageField(upload_to='writerimage',default='default.jpg')
     contentimage = models.ImageField(upload_to='contentimage',default='default.jpg')
     category = models.ManyToManyField(Category)
+    tag = models.ManyToManyField(Tags)
     title = models.CharField(max_length=100)
     content = models.TextField()
     quote = models.TextField()
@@ -44,4 +51,30 @@ class Blog(models.Model):
         return self.title.capitalize()
     
 
+class Comment(models.Model):
+    which_blog = models.ForeignKey(Blog,on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=100)
+    message = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+    status = models.BooleanField(default=False)
+    class Meta:
+        ordering = ['-created_date']
+
+    def __str__(self):
+        return self.name
     
+
+class Reply(models.Model):
+    which_comment = models.ForeignKey(Comment,on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    message = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+    status = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['-created_date']
+
+    def __str__(self):
+        return self.name

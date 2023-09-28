@@ -974,6 +974,8 @@ section {
 .team .team-member .member-img {
   position: relative;
   overflow: hidden;
+  width: 400px; 
+  height: 350px; 
 }
 
 .team .team-member .social {
@@ -2175,4 +2177,12 @@ section {
   text-align: center;
   font-size: 13px;
   color: var(--color-secondary);
+}
+.profile-image {
+  border-radius: 100%;
+  width: 50px; 
+  height: 50px; 
+}
+.logged-as {
+  color: #ffffff;
 }

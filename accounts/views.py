@@ -12,8 +12,9 @@ def signup(request):
     if request.user.is_authenticated:
         return redirect('/')
     elif request.method == 'GET':
+        captcha = CaptchaForm()
         form = CustomUserCreation()
-        return render(request,'registration/signup.html', context={'form': form})
+        return render(request,'registration/signup.html', context={'form': form,'captcha': captcha})
     else:
         captcha_form = CaptchaForm(request.POST)
         if captcha_form.is_valid():
@@ -36,6 +37,10 @@ def signup(request):
         else:
             messages.add_message(request, messages.ERROR, 'Invalid captcha')
             return redirect(request.path_info)
+
+        
+
+        
 def Login(request):
     if request.user.is_authenticated:
         return redirect('/')

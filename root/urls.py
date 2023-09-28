@@ -10,6 +10,4 @@ urlpatterns = [
     path('service', service, name='service'),
     path('portfolio',portfolio , name='portfolio'),
     path('team',team , name='team'),
-    path('blog',blog , name='blog'),
-
 ]

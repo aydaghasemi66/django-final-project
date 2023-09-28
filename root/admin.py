@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Services
+from .models import *
 
 # Register your models here.
 
@@ -10,3 +10,5 @@ class AdminServices(admin.ModelAdmin):
     search_fields = ['title']
 
 admin.site.register(Services,AdminServices)
+admin.site.register(Team)
+admin.site.register(ContactUs)
