@@ -54,41 +54,53 @@
         <h1 class="d-flex align-items-center">Nova</h1>
       </a>
       {% if request.user.is_authenticated %}
-      <li class="logged-as">Logged as {{ request.user.username }}</li>
-
-      <img src="{{ request.user.image.url }}" alt="Profile Image" class="profile-image">
+<div class="user-log">
+      <li><a href={% url 'accounts:logout' %}>Logout&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+      <li><a href={% url 'password_change' %}>change password&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+</div>
+      {% else %}
+<div class="user-pass">
+      <li><a href={% url 'accounts:login' %}>Login</a></li>
+      <li><a href={% url 'accounts:signup' %}>signup</a></li>
+</div>
       {% endif %}
+
+
+
+
+
 
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 
       <nav id="navbar" class="navbar">
         <ul>
+          
           <li><a href="{% url 'root:home' %}" class="active">Home</a></li>
           <li><a href="{% url 'root:about' %}">About</a></li>
           <li><a href="{% url 'root:service' %}">Services</a></li>
-          <li><a href="{% url 'root:portfolio' %}">Portfolio</a></li>
+          <li><a href="{% url 'portfolio:portfolio' %}">Portfolio</a></li>
           <li><a href="{% url 'root:team' %}">Team</a></li>
           <li><a href="{% url 'blogs:blog' %}">Blog</a></li>
-          <li class="dropdown"><a href="#"><span>Category</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              
-              {% for cat in category %}
-              <li><a href="{% url 'blogs:blog_cat' cat=cat.name %}">{{ cat.name }}</a>
-              </li>
-              {% endfor %}
+          <ul class="nav-menu">
+            <li class="dropdown"><a href="#"><span>Category</span> <i class="bi bi-chevron-down"></i></a>
+                <ul>
+                    {% for cat in category %}
+                    <li><a href="{% url 'blogs:blog_cat' cat=cat.name %}">{{ cat.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <li><a href="{% url 'root:contact' %}">Contact</a></li>
+            {% if request.user.is_authenticated %}
+            <li class="user-info">
+                <span class="logged-as">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logged as {{ request.user.username }}</span>
+                <img src="{{ request.user.image.url }}" alt="Profile Image" class="profile-image">
+            </li>
+            {% endif %}
+        </ul>
+        
 
-            </ul>
-          </li>
-          <li><a href="{% url 'root:contact' %}">Contact</a></li>
-          {% if request.user.is_authenticated %}
-
-          <li><a href={% url 'accounts:logout' %}>Logout</a></li>
-          <li><a href={% url 'password_change' %}>change password</a></li>
-          {% else %}
-          <li><a href={% url 'accounts:login' %}>Login</a></li>
-          <li><a href={% url 'accounts:signup' %}>signup</a></li>
-          {% endif %}
+        
 
         </ul>
       </nav><!-- .navbar -->

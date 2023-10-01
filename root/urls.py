@@ -8,6 +8,5 @@ urlpatterns = [
     path("about",about,name="about"),
     path("contact",contact,name="contact"),
     path('service', service, name='service'),
-    path('portfolio',portfolio , name='portfolio'),
     path('team',team , name='team'),
 ]

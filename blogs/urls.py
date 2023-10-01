@@ -13,6 +13,6 @@ urlpatterns = [
     path("<int:id>",delete_comment,name="delete"),
     path("edit/comment/<int:id>",edit,name="edit"),
     path("comment/reply/<int:id>",reply,name="reply"),
-    path("tags/<str:cat>",blog,name="blog_tag"),
+    path("tags/<str:tag>",blog,name="blog_tag"),
 ]
 

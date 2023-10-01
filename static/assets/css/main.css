@@ -267,7 +267,9 @@ section {
 --------------------------------------------------------------*/
 @media (min-width: 1280px) {
   .navbar {
-    padding: 0;
+    padding-left: 0cm;
+    text-align: right;
+
   }
 
   .navbar ul {
@@ -506,7 +508,7 @@ section {
   .hero:after {
     position: absolute;
     content: "";
-    width: 40%;
+    width: 37%;
     background: var(--color-secondary);
     top: 0;
     bottom: 0;
@@ -974,7 +976,7 @@ section {
 .team .team-member .member-img {
   position: relative;
   overflow: hidden;
-  width: 400px; 
+  width: 350px; 
   height: 350px; 
 }
 
@@ -1011,7 +1013,7 @@ section {
 
 .team .team-member .social i {
   font-size: 18px;
-  margin: 0 2px;
+  margin: 10px 5px;
 }
 
 .team .team-member .member-info {
@@ -2184,5 +2186,72 @@ section {
   height: 50px; 
 }
 .logged-as {
-  color: #ffffff;
+  color: #f7f9fc;
+}
+
+
+/* Update your existing CSS */
+ul.nav-menu {
+    float: left;
+}
+
+
+
+/* Style for the user info */
+.user-info {
+    float: right;
+    display: inline-block;
+    margin-right: 1px; /* Adjust as needed for spacing */
+    margin-top: 5px; /* Adjust as needed for vertical alignment */
+}
+
+/* Style for the profile image */
+.profile-image {
+    width: 40px; /* Adjust the size as needed */
+    height: 40px; /* Adjust the size as needed */
+    border-radius: 50%; /* Make it round */
+    margin-left: 1px; /* Adjust as needed for spacing */
+}
+.user-pass{
+  list-style: none;
+  display: flex;
+  align-items: left; /* Vertically center the text and image */
+  margin-left: auto; /* Push user info to the right */
+}
+
+.user-pass a,
+.user-pass a:focus {
+  display: flex;
+  align-items: right;
+  justify-content: space-between;
+  
+  padding: 30px 15px 30px;
+  font-family: var(--font-default);
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+  transition: 0.3s;
+}
+.user-log{
+  list-style: none;
+  display: flex;
+  align-items: left; /* Vertically center the text and image */
+  margin-left: 100px; /* Push user info to the right */
+}
+
+
+.user-log a,
+.user-log a:focus {
+  display: flex;
+  align-items: left;
+  justify-content: space-between;
+  
+  padding: 30px 10px 30px;
+  font-family: var(--font-default);
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+  transition: 0.3s;
 }

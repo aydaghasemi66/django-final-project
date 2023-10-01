@@ -56,12 +56,6 @@ def contact(request):
             return redirect('root:contact')
 
  
-def portfolio(request):
-    category=Category.objects.all()
-    context={
-         'category': category
-    }
-    return render(request,"root/portfolio.html",context=context)   
 def team(request):
     category=Category.objects.all()
     team=Team.objects.filter(status=True)

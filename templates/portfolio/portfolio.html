@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'title' %}portfolio{% endblock 'title' %}
+{% block 'content' %}
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('{% static 'assets/img/portfolio-header.jpg ' %}');">
+      <div class="container position-relative d-flex flex-column align-items-center">
+
+        <h2>Portfolio</h2>
+        <ol>
+          <li><a href="index.html">Home</a></li>
+          <li>Portfolio</li>
+        </ol>
+
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio">
+      <div class="container" data-aos="fade-up">
+
+        <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order">
+          <ul class="portfolio-flters" data-aos="fade-up" data-aos-delay="100">
+            <li><a href="{% url 'portfolio:portfolio' %}" class="filter-active">All</a></li>
+            {% for category in cat %}
+            <li><a href="{% url 'portfolio:port_cat' cat=category.name %}">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+        
+        
+          </ul><!-- End Portfolio Filters -->
+          <div class="row gy-4 portfolio-container" data-aos="fade-up" data-aos-delay="300">
+            {% for port in portfolio %}
+              <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                {% if port.image.all %}
+                  <!-- Check if there are images associated with the portfolio item -->
+                  {% with first_image=port.image.first %}
+                    <img src="{{ first_image.image.url }}" class="img-fluid" alt="">
+                    <div class="portfolio-info">
+                      <h4>{{ port.title }}</h4>
+                      <p>{{ port.content }}</p>
+                      <a href="{{ first_image.image.url }}" title="{{ port.title }}" data-gallery="portfolio-gallery-app" class="glightbox preview-link">
+                        <i class="bi bi-zoom-in"></i>
+                     
+                      <a href="{% url 'portfolio:portfolio_detail' id=port.id %}" title="More Details" class="details-link">
+                        <i class="bi bi-link-45deg"></i>
+                      </a>
+                    </div>
+                  {% endwith %}
+                {% endif %}
+              </div><!-- End Portfolio Item -->
+            {% endfor %}
+          </div><!-- End Portfolio Container -->
+          
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Section -->
+
+  </main><!-- End #main -->
+  {% endblock 'content' %}

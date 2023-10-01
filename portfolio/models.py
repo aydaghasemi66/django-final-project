@@ -7,8 +7,14 @@ class Category(models.Model):
     name = models.CharField(max_length=100)
     def str(self):
         return self.name
+    
+class PortfolioImage(models.Model):
+    image = models.ImageField(upload_to='portfolio')
+
+    def str(self):
+        return self.image
 class Portfolio(models.Model):
-    image = models.ImageField(blank=True)
+    image = models.ManyToManyField(PortfolioImage)
     category = models.ManyToManyField(Category)
     client = models.CharField(max_length=100)
     project_date = models.DateTimeField(default=datetime.datetime.now())
@@ -27,9 +33,3 @@ class Portfolio(models.Model):
     
     def capt(self):
         return self.title.capitalize()
-class PortfolioImage(models.Model):
-    portfolio = models.ForeignKey(Portfolio, related_name='images', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='contentimage')
-
-    def str(self):
-        return self.portfolio.title
