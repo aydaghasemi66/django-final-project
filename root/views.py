@@ -41,9 +41,13 @@ def about (request):
 
 
 def contact(request):
+    category=Category.objects.all()
+    context={
+         'category': category,
+    }
     if request.method =='GET':
 
-        return render(request,"root/contact.html")
+        return render(request,"root/contact.html",context=context)
         
     elif request.method == 'POST':
         form = ContactUsForm(request.POST)

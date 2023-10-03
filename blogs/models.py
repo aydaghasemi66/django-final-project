@@ -27,9 +27,11 @@ class Blog(models.Model):
     writerimage = models.ImageField(upload_to='writerimage',default='default.jpg')
     contentimage = models.ImageField(upload_to='contentimage',default='default.jpg')
     category = models.ManyToManyField(Category)
-    tag = models.ManyToManyField(Tags)
+    tag = models.ManyToManyField(Tags , related_name='blogs')
     title = models.CharField(max_length=100)
-    content = models.TextField()
+    content1 = models.TextField()
+    content2 = models.TextField()
+    content3 = models.TextField()
     quote = models.TextField()
     writer = models.ForeignKey(Writer,on_delete=models.CASCADE)
     counted_comment = models.IntegerField(default=0)
@@ -45,20 +47,23 @@ class Blog(models.Model):
     
 
     def snip(self):
-        return self.content[:20] + '...'
+        return self.content1[:20] + '...'
+
     
     def capt(self):
         return self.title.capitalize()
     
 
 class Comment(models.Model):
-    which_blog = models.ForeignKey(Blog,on_delete=models.CASCADE)
+    userprofile= models.ForeignKey(CustomeUser,on_delete=models.CASCADE,null=True,blank=True)
+    which_blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     email = models.EmailField()
-    subject = models.CharField(max_length=100)
+    website = models.CharField(max_length=100)
     message = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
     status = models.BooleanField(default=False)
+
     class Meta:
         ordering = ['-created_date']
 
@@ -67,6 +72,7 @@ class Comment(models.Model):
     
 
 class Reply(models.Model):
+    userprofile= models.ForeignKey(CustomeUser,on_delete=models.CASCADE,null=True,blank=True)
     which_comment = models.ForeignKey(Comment,on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     message = models.TextField()

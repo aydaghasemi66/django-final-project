@@ -1,27 +1,154 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block 'title' %}reply{% endblock 'title' %}
-{% block 'content' %}
-<br><br><br><br>
-<form method='post'>
-    {% csrf_token %}
-    <div class="form-group form-inline">
-      <div class="form-group col-lg-6 col-md-12 name">
-        <input type='hidden' name='which_comment' value={{comment.id}}>
-        <input type="text" class="form-control" name="name" placeholder="Enter Name"
-          onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
-      </div>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            outline: none;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body{
+            height: 100vh;
+            width: 100%;
+            background: #1b2f45;
+        }
+        .container{
+            background: #56b8e6;
+            width: 410px;
+            padding: 30px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+            margin: auto;
+            margin-top: 10%;
+        }
+        .container .close-btn{
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .container .close-btn:hover{
+            color: #3498db;
+        }
+        .container .text{
+            font-size: 35px;
+            font-weight: 600;
+            text-align: center;
+        }
+        .container form{
+            margin-top: -20px;
+        }
+        .container form .data{
+            height: 45px;
+            width: 100%;
+            margin: 40px 0;
+        }
+        form .data label{
+            font-size: 18px;
+        }
+        form .data input{
+            height: 100%;
+            width: 100%;
+            padding-left: 10px;
+            font-size: 17px;
+            border: 1px solid silver;
+        }
+        form .data input:focus{
+            border-color: #3498db;
+            border-bottom-width: 2px;
+        }
+        form .forgot-pass{
+            margin-top: -8px;
+        }
+        form .forgot-pass a{
+            color: black; /* Change the color to black */
+            text-decoration: none;
+        }
+        form .forgot-pass a:hover{
+            text-decoration: underline;
+        }
+        form .btn{
+            margin: 30px 0;
+            height: 45px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        form .btn .inner{
+            height: 100%;
+            width: 300%;
+            position: absolute;
+            left: -100%;
+            z-index: -1;
+            background: -webkit-linear-gradient(right, #56d8e4, #9f01ea, #56d8e4, #9f01ea);
+            transition: all 0.4s;
+        }
+        form .btn:hover .inner{
+            left: 0;
+        }
+        form .btn button{
+            height: 100%;
+            width: 100%;
+            background: #1b2f45; /* Change the background color to black */
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+        form .signup-link{
+            text-align: center;
+        }
+        form .signup-link a{
+            color: black; /* Change the color to black */
+            text-decoration: none;
+        }
+        form .signup-link a:hover{
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form class="login-form" method="post">
+            {% csrf_token %}
+            <div class="text">
+              Leave a Reply
+            </div>
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+                  <input type='hidden' name='which_comment' value={{comment.id}}>
+                  <input type="hidden" class="form-control" name="name" placeholder="Enter Name"
+                  onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'" value={{request.user.username}}>
+
+            <div class="data">
+              <textarea  class="data" name="message" rows="5" placeholder="Message" required></textarea>
+              
+            </div>
+            <div class="forgot-pass">
+              <br>
+                <a href="{% url 'root:home'%}">Back to Home</a>
+            </div>
+            <div class="btn">
+                <div class="inner"></div>
+                <button type='submit' class="primary-btn text-uppercase">Reply Comment</button>
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-      <textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege"
-        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
-    </div>
-    <button type='submit' class="primary-btn text-uppercase">Reply Comment</button>
-    {% if messages %}
-        {% for message in messages %}
-             <p>{{message}}</p>
-        {% endfor %}
-    {% endif %}
-  </form>
-<br><br><br><br>
-{% endblock 'content' %}
+</body>
+</html>

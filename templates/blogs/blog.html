@@ -34,7 +34,7 @@
             
                   <!-- Display the blog post image -->
                   <div class="post-img">
-                    <img src={{blog.contentimage.url}}  alt="" class="img-fluid">
+                    <img src={{blog.writerimage.url}}  alt="" class="img-fluid">
                   </div>
             
                   <!-- Display the blog post title and link -->
@@ -44,9 +44,9 @@
 
                   <div class="meta-top">
                     <ul>
-                      <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">{{blog.writer}}</a></li>
-                      <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2022-01-01">{{blog.created_date|date:"d M Y"}}</time></a></li>
-                      <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html"></a></li>
+                      <li class="d-flex align-items-center"><i class="bi bi-person"></i> {{blog.writer}}</li>
+                      <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <time datetime="2022-01-01">{{blog.created_date|date:"d M Y"}}</time></li>
+                      <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> {{comments.count}}</li>
                     </ul>
                   </div>
 

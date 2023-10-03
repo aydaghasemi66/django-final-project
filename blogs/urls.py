@@ -12,7 +12,8 @@ urlpatterns = [
     path("blog-detail/<int:id>",blog_detail,name="blog_detail"),
     path("<int:id>",delete_comment,name="delete"),
     path("edit/comment/<int:id>",edit,name="edit"),
-    path("comment/reply/<int:id>",reply,name="reply"),
+
+    path('blog/comment/reply/<int:id>/', reply, name='reply'),
     path("tags/<str:tag>",blog,name="blog_tag"),
 ]
 

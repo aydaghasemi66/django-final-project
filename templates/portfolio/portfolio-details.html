@@ -12,7 +12,7 @@
 
         <h2>Portfolio Details</h2>
         <ol>
-          <li><a href="index.html">Home</a></li>
+          <li><a href="{% url 'root:home' %}">Home</a></li>
           <li>Portfolio Details</li>
         </ol>
 
@@ -29,21 +29,16 @@
             <div class="slides-1 portfolio-details-slider swiper">
               <div class="swiper-wrapper align-items-center">
 
-                <div class="swiper-slide">
-                  <img src="{% static 'assets/img/portfolio/app-1.jpg ' %}" alt="">
-                </div>
 
+                {% for image in portfolio.image.all  %}
                 <div class="swiper-slide">
-                  <img src="{% static 'assets/img/portfolio/product-1.jpg ' %}" alt="">
+                  <img src="{{image.image.url}}" alt="">
                 </div>
+                {% endfor %}
 
-                <div class="swiper-slide">
-                  <img src="{% static 'assets/img/portfolio/branding-1.jpg ' %}" alt="">
-                </div>
 
-                <div class="swiper-slide">
-                  <img src="{% static 'assets/img/portfolio/books-1.jpg ' %}" alt="">
-                </div>
+
+       
 
               </div>
               <div class="swiper-pagination"></div>
@@ -54,16 +49,20 @@
             <div class="portfolio-info">
               <h3>Project information</h3>
               <ul>
-                <li><strong>Category</strong>: Web design</li>
-                <li><strong>Client</strong>: ASU Company</li>
-                <li><strong>Project date</strong>: 01 March, 2020</li>
-                <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
+      
+                <li><strong>Category</strong>: {% for cat in portfolio.category.all  %}
+                  {{cat.name}}{% endfor %}</li>
+                
+                <li><strong>Client</strong>:{{portfolio.client}}</li>
+                <li><strong>Project date</strong>: {{portfolio.project_date}}</li>
+                <li><strong>Project URL</strong>: <a href="{{ portfolio.projecturl }}">{{ portfolio.projecturl }}</a></li>
+
               </ul>
             </div>
             <div class="portfolio-description">
-              <h2>This is an example of portfolio detail</h2>
+              <h2>{{portfolio.title}}</h2>
               <p>
-                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
+                {{portfolio.content}}
               </p>
             </div>
           </div>

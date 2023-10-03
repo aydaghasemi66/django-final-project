@@ -17,6 +17,9 @@
             height: 100vh;
             width: 100%;
             background: #1b2f45;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .container{
             background: #56b8e6;
@@ -24,7 +27,6 @@
             padding: 30px;
             box-shadow: 0 0 8px rgba(0,0,0,0.1);
             margin: auto;
-            margin-top: 10%;
         }
         .container .close-btn{
             position: absolute;
@@ -40,37 +42,36 @@
             font-size: 35px;
             font-weight: 600;
             text-align: center;
-        }
-        .container form{
-            margin-top: -20px;
+            margin-bottom: 20px;
         }
         .container form .data{
             height: 45px;
             width: 100%;
             margin: 20px 0;
+            position: relative;
         }
-        form .data label{
+        .container form .data label{
             font-size: 18px;
         }
-        form .data input{
+        .container form .data input{
             height: 100%;
             width: 100%;
             padding-left: 10px;
             font-size: 17px;
             border: 1px solid silver;
         }
-        form .data input:focus{
+        .container form .data input:focus{
             border-color: #3498db;
             border-bottom-width: 2px;
         }
-        form .btn{
+        .container form .btn{
             margin: 30px 0;
             height: 45px;
             width: 100%;
             position: relative;
             overflow: hidden;
         }
-        form .btn .inner{
+        .container form .btn .inner{
             height: 100%;
             width: 300%;
             position: absolute;
@@ -79,10 +80,10 @@
             background: -webkit-linear-gradient(right, #56d8e4, #9f01ea, #56d8e4, #9f01ea);
             transition: all 0.4s;
         }
-        form .btn:hover .inner{
+        .container form .btn:hover .inner{
             left: 0;
         }
-        form .btn button{
+        .container form .btn button{
             height: 100%;
             width: 100%;
             background: #1b2f45;
@@ -94,40 +95,31 @@
             letter-spacing: 1px;
             cursor: pointer;
         }
-        form .signup-link{
+        .container form .signup-link{
             text-align: center;
         }
-        form .signup-link a{
+        .container form .signup-link a{
             color: black;
             text-decoration: none;
         }
-        form .signup-link a:hover{
+        .container form .signup-link a:hover{
             text-decoration: underline;
         }
-        form .forgot-pass{
-          margin-top: -8px;
-      }
-      form .forgot-pass a{
-          color: black; /* Change the color to black */
-          text-decoration: none;
-      }
-      form .forgot-pass a:hover{
-          text-decoration: underline;
-      }
-
-      .forgot-pass {
-          text-align: center;
-      }
-
-      .center-link {
-          margin-top: 10px; /* Adjust as needed for vertical spacing */
-      }
-
+        .container form .forgot-pass{
+            margin-top: -8px;
+        }
+        .container form .forgot-pass a{
+            color: black;
+            text-decoration: none;
+        }
+        .container form .forgot-pass a:hover{
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <form class="signup-form" method="post">
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="text">
                 Signup
@@ -164,16 +156,16 @@
                 <input type="file" id="image" name="image">
             </div>
             <br>
-          {{captcha}}
+            {{captcha}}
             <div class="btn">
                 <div class="inner"></div>
                 <button type="submit" action="{% url 'accounts:signup' %}">Signup</button>
             </div>
             <div class="forgot-pass">
-              <div class="center-link">
-                  <a href="{% url 'root:home' %}">Back to Home</a>
-              </div>
-          </div>
+                <div class="center-link">
+                    <a href="{% url 'root:home' %}">Back to Home</a>
+                </div>
+            </div>
             <div class="signup-link">
                 Already a member? <a href="{% url 'accounts:login'%}">Login now</a>
             </div>

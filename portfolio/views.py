@@ -2,13 +2,16 @@ from django.shortcuts import render, get_object_or_404
 from .models import *
 
 def portfolio_detail(request, id):
-    portfolio = get_object_or_404(Portfolio, id=id)
+    try:
+        portfolio = Portfolio.objects.get(id=id)
+       
+
+        context ={"portfolio": portfolio,
+            }
+        return render(request,'portfolio/portfolio-details.html',context=context)
+    except:
+        return render(request,'portfolio/404.html')
     
-    context = {
-        'portfolio':portfolio
-        
-    }
-    return render(request, 'portfolio/portfolio-details.html', context=context)
 # Create your views here.
 def portfolio(request, cat=None):
     category=Category.objects.all()

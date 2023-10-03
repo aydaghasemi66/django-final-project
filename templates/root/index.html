@@ -237,7 +237,7 @@
             <div class="post-box">
               <div class="post-img"><img src="{{ blog.writerimage.url }}" class="img-fluid" alt=""></div>
               <div class="meta">
-                <span class="post-date">{{ blog.created_date|timesince:question_date }}</span>
+                <span class="post-date">{{ blog.created_date|date:"D d M Y" }}</span>
                 <span class="post-author"> / {{ blog.writer }}</span>
               </div>
               <h3 class="post-title">{{ blog.title }}</h3>
